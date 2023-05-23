@@ -79,7 +79,7 @@ public abstract class AbstractViewContainer implements ViewContainer {
 	private Image iconImage;
 	private String id;
 	private JToolBar jToolBar;
-	// private Log logger = LogFactory.getLog(AbstractViewContainer.class);
+ 
 	private ResourceBundle messageBundle;
 	private Map<String, List<Component>> namedComponents;
 	private JRootPane rootPane;

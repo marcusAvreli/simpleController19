@@ -68,10 +68,15 @@ public class DefaultViewManager extends AbstractViewManager
 		this.setPerspective(perspective);		
 	}
 
-
+	private void debugJustInCase(String message) {
+		if (logger.isInfoEnabled()) {
+			logger.info(message);
+		}
+	}
 	@Override
 	public Container arrangeViews() 
 	{
+		debugJustInCase("arrange_view_started");
 		JFrame 				rootContainer 	= null;
 		Container 			container 		= null;
 		ViewContainerFrame 	rootView 		= null; 	
@@ -80,16 +85,26 @@ public class DefaultViewManager extends AbstractViewManager
 			rootView 		= this.getRootView();
 			rootContainer 	= rootView.getFrame();
 			container 		= super.arrangeViews();
+			if(null != container) {
+				debugJustInCase("container_is_not_null");
+			}else {
+				debugJustInCase("container_is_null");
+			}
+			
 			rootContainer.setContentPane(rootView.getRootPane());
-			((JRootPane)rootContainer.getContentPane()).getContentPane().add(container);			
+			debugJustInCase("checkPost_1");
+			((JRootPane)rootContainer.getContentPane()).getContentPane().add(container);
+			debugJustInCase("checkPost_2");
 			try {
+				debugJustInCase("checkPost_3");
 				this.addView(rootView);
+				debugJustInCase("checkPost_4");
 			} catch (ViewException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
 		
-			
+		debugJustInCase("arrange_view_finished");
 		return rootContainer;
 	}
 

@@ -24,7 +24,9 @@ import simpleController19.core.annotation.processor.ViewsProcessorWrapper;
 import simpleController19.core.controller.DefaultViewControllerDispatcher;
 import simpleController19.core.view.DefaultViewManager;
 import simpleController19.core.view.perspective.DefaultPerspective;
+import simpleController19.core.view.perspective.MyPerspective;
 import simpleController19.widget.swing.builder.util.SwingBuilderView;
+import simpleController19.widget.swing.builder.util.TabView;
 import simpleController19.widget.swing.builder.util.TableView;
 
 
@@ -63,17 +65,21 @@ public abstract class AbstractApplication implements Application
 	private List<ViewsProcessorWrapper> initViews;
 	public AbstractApplication(){
 		logger.info("constructor_0");
-		this.viewManager 			= new DefaultViewManager(this,new DefaultPerspective());
+		//this.viewManager 			= new DefaultViewManager(this,new DefaultPerspective());
+		this.viewManager 			= new DefaultViewManager(this,new MyPerspective());
 		this.dispatcher 			= new DefaultViewControllerDispatcher();
 		ViewContainer vc = new SwingBuilderView(); 
 		
 		ViewContainer tableContainer = new TableView();
+		ViewContainer tabContainer = new TabView(); 
 		//public ViewsProcessorWrapper(ViewContainer view,PerspectiveConstraint constraint,boolean rootView,boolean trayView){
 		ViewsProcessorWrapper wrapper = new ViewsProcessorWrapper(vc, PerspectiveConstraint.LEFT, false, false);
 		initViews = new ArrayList<ViewsProcessorWrapper>();
 		initViews.add(wrapper);
 		wrapper = new ViewsProcessorWrapper(tableContainer, PerspectiveConstraint.RIGHT, false, false);
 		initViews.add(wrapper);
+	//	wrapper = new ViewsProcessorWrapper(tabContainer, PerspectiveConstraint.RIGHT, false, false);
+		//initViews.add(wrapper);
 	}
 	
 	/**
